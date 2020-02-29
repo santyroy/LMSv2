@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+<title>All Books</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container" th:if="${books.isEmpty()}">
+		<p>Library is Empty</p>
+	</div>
+
+	<div class="container">
+		<table class="table table-striped">
+			<thead class="thead-dark">
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Author</th>
+					<th>Purchase Date</th>
+					<th>Edit</th>
+					<th>Delete</th>
+				</tr>
+			</thead>
+			<tbody class="table-body">
+				<tr th:each="book: ${books}">
+					<td th:text="${book.id}"></td>
+					<td th:text="${book.name}"></td>
+					<td th:text="${book.author}"></td>
+					<td th:text="${book.purchase}"></td>
+					<td><a th:href="@{/edit/__${book.id}__}"><img
+							src="../static/img/edit.png" alt="" th:src="@{img/edit.png}"></a></td>
+					<td><a th:href="@{/delete/__${book.id}__}"><img
+							th:src="@{img/delete.png}" alt=""></a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div align="center">
+		<form action="/search-books">
+			<div>
+				<input type="text" name="name" placeholder="Search Book"> <input
+					type="submit" value="Search" class="btn btn-success">
+			</div>
+		</form>
+	</div>
+	<br>
+	<br>
+	<div align="center">
+		<a href="/" class="btn btn-primary" role="button">Back to Home</a>
+	</div>
+</body>
+</html>
